@@ -3,14 +3,8 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-/* Layout */
 import Layout from '@/layout'
 
-/**
- * constantRoutes
- * a base page that does not have permission requirements
- * all roles can be accessed
- */
 export const constantRoutes = [
   {
     path: '/redirect',
@@ -63,7 +57,19 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
-  // 404 page must be placed at the end !!!
+  {
+    path: '/book',
+    component: Layout,
+    meta: { title: '图书管理', icon: 'documentation', roles: ['admin'] },
+    children: [
+      {
+        path: '/book/create',
+        component: () => import('@/views/book/create'),
+        meta: { title: '上传图书', icon: 'edit', roles: ['admin'] }
+
+      }
+    ]
+  },
   { path: '*', redirect: '/404', hidden: true }
 ]
 

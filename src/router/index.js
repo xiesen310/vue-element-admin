@@ -86,6 +86,42 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  {
+    path: '/clickhouse',
+    component: Layout,
+    redirect: '/clickhouse/list',
+    name: 'clickhouse',
+    meta: {
+      title: 'Clickhouse',
+      icon: 'el-icon-s-help'
+    },
+    children: [
+      {
+        path: 'createDataBase',
+        component: () => import('@/views/clickhouse/createDataBase'),
+        name: '创建数据库',
+        meta: { title: '创建数据库', icon: 'edit' }
+      },
+      {
+        path: 'createTable',
+        component: () => import('@/views/clickhouse/createTable'),
+        name: '创建表',
+        meta: { title: '创建表', icon: 'edit' }
+      },
+      {
+        path: 'databaseList',
+        component: () => import('@/views/clickhouse/databaseList'),
+        name: '数据库列表',
+        meta: { title: '数据库列表', icon: 'list' }
+      },
+      {
+        path: 'tableList',
+        component: () => import('@/views/clickhouse/tableList'),
+        name: '数据表列表',
+        meta: { title: '数据表列表', icon: 'list' }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
